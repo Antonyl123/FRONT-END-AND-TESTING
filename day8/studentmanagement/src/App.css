@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a, #2563eb);
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.title {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 2.3rem;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-box input {
+  width: 350px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 14px 25px;
+  border: none;
+  border-radius: 10px;
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  transform: scale(1.05);
+}
+
+.student-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.student-name {
+  color: #2563eb;
+  margin-bottom: 25px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.detail-box {
+  background: #f1f5f9;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.detail-box h4 {
+  color: #2563eb;
+  margin-bottom: 5px;
+}
+
+.detail-box p {
+  color: #333;
+}
+
+.error {
+  background: white;
+  color: red;
+  padding: 20px;
+  border-radius: 15px;
+  font-weight: bold;
+}
