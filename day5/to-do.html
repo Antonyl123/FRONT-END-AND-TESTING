@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.container{
+    width:400px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+.input-area{
+    display:flex;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    padding:10px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    transition:0.3s;
+}
+
+.add-btn{
+    background:#28a745;
+}
+
+.add-btn:hover{
+    background:#218838;
+}
+
+ul{
+    list-style:none;
+    margin-top:20px;
+}
+
+li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f4f4f4;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:8px;
+}
+
+.completed{
+    text-decoration:line-through;
+    color:gray;
+}
+
+.task-buttons button{
+    margin-left:5px;
+}
+
+.complete-btn{
+    background:#007bff;
+}
+
+.delete-btn{
+    background:#dc3545;
+}
+
+.complete-btn:hover{
+    background:#0056b3;
+}
+
+.delete-btn:hover{
+    background:#c82333;
+}
+
+.stats{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+    color:#555;
+}
+
+@media(max-width:500px){
+    .container{
+        width:90%;
+    }
+
+    .input-area{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📝 To-Do List</h1>
+
+    <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <button class="add-btn" onclick="addTask()">Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <div class="stats">
+        Total Tasks: <span id="taskCount">0</span>
+    </div>
+
+</div>
+
+<script>
+
+function addTask(){
+
+    let taskInput = document.getElementById("taskInput");
+    let taskText = taskInput.value.trim();
+
+    if(taskText === ""){
+        alert("Please enter a task!");
+        return;
+    }
+
+    let li = document.createElement("li");
+
+    li.innerHTML = `
+        <span>${taskText}</span>
+
+        <div class="task-buttons">
+            <button class="complete-btn" onclick="completeTask(this)">✓</button>
+            <button class="delete-btn" onclick="deleteTask(this)">✕</button>
+        </div>
+    `;
+
+    document.getElementById("taskList").appendChild(li);
+
+    taskInput.value = "";
+
+    updateCount();
+}
+
+function completeTask(button){
+    let task = button.parentElement.parentElement.querySelector("span");
+    task.classList.toggle("completed");
+}
+
+function deleteTask(button){
+    button.parentElement.parentElement.remove();
+    updateCount();
+}
+
+function updateCount(){
+    let totalTasks = document.querySelectorAll("#taskList li").length;
+    document.getElementById("taskCount").innerText = totalTasks;
+}
+
+</script>
+
+</body>
+</html>
