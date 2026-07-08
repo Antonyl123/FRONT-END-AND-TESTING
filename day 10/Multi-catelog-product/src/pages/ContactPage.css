@@ -1,0 +1,323 @@
+/* ============================================================
+   TONY CATALOG — Contact Page Styles
+   ============================================================ */
+
+.contact-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #7c3aed 100%);
+  padding: 60px 0;
+  color: white;
+  text-align: center;
+}
+
+.contact-hero__inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.contact-hero__tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--border-radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-hero__title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-hero__subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+/* Contact Cards Grid */
+.contact-body {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  text-decoration: none;
+  transition: all var(--transition);
+  border: 1px solid var(--border-color);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-color, var(--clr-primary));
+  box-shadow: var(--shadow-md);
+}
+
+.contact-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--txt-primary);
+  margin-bottom: 2px;
+}
+
+.contact-card__value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--txt-primary);
+  word-break: break-all;
+}
+
+.contact-card__sub {
+  font-size: 0.8rem;
+  color: var(--txt-muted);
+  margin-top: 4px;
+}
+
+/* Main Content Layout */
+.contact-main {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 968px) {
+  .contact-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Styling */
+.contact-form-wrap {
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+}
+
+.contact-form-wrap__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.contact-form-wrap__header h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--txt-primary);
+  margin-bottom: 2px;
+}
+
+.contact-form-wrap__header p {
+  font-size: 0.9rem;
+  color: var(--txt-secondary);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 600px) {
+  .contact-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form__field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--txt-secondary);
+}
+
+.contact-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-xl) 0;
+  gap: var(--space-md);
+}
+
+.contact-success h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--txt-primary);
+  margin-top: var(--space-sm);
+}
+
+.contact-success p {
+  color: var(--txt-secondary);
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Sidebar Styles */
+.contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-quick {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.contact-quick__title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--txt-primary);
+  margin-bottom: var(--space-md);
+}
+
+.contact-quick__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-quick__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition);
+}
+
+.contact-quick__item:hover {
+  transform: translateX(4px);
+}
+
+.contact-quick__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-quick__label {
+  font-size: 0.75rem;
+  color: var(--txt-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.contact-quick__val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--txt-primary);
+}
+
+/* Social Grid in Sidebar */
+.contact-social {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.contact-social__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-sm);
+}
+
+.contact-social__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  color: var(--txt-primary);
+  transition: all var(--transition);
+}
+
+.contact-social__item:hover {
+  border-color: var(--s-color);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+/* FAQ Accordion styles */
+.contact-faq {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.contact-faq__item {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-sm) 0;
+}
+
+.contact-faq__item:last-child {
+  border-bottom: none;
+}
+
+.contact-faq__q {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--txt-primary);
+  margin-bottom: 4px;
+}
+
+.contact-faq__a {
+  font-size: 0.8rem;
+  color: var(--txt-secondary);
+  line-height: 1.4;
+}

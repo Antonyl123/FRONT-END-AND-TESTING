@@ -1,0 +1,70 @@
+/* ── Profile Page ────────────────────────────────────────────── */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.profile-header__left { display: flex; align-items: center; gap: var(--space-xl); }
+.profile-header__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--clr-primary);
+  box-shadow: 0 0 0 4px var(--clr-primary-light);
+}
+.profile-header__name { font-size: 1.6rem; font-weight: 900; color: var(--txt-primary); letter-spacing: -0.02em; }
+.profile-header__email { color: var(--txt-secondary); font-size: 0.9rem; margin-top: 4px; }
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+.profile-stat {
+  padding: var(--space-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.profile-stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.profile-stat__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-stat__value { font-size: 1.6rem; font-weight: 900; color: var(--txt-primary); }
+.profile-stat__label { font-size: 0.8rem; color: var(--txt-muted); font-weight: 600; }
+
+.profile-orders { display: flex; flex-direction: column; gap: var(--space-md); }
+.profile-order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.profile-order__id { font-weight: 800; color: var(--txt-primary); }
+.profile-order__date, .profile-order__items { font-size: 0.82rem; color: var(--txt-muted); }
+.profile-order__right { display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap; }
+.profile-order__total { font-size: 1.1rem; font-weight: 800; color: var(--txt-primary); }
+
+@media (max-width: 900px) { .profile-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+  .profile-header { flex-direction: column; }
+  .profile-header__left { flex-direction: column; text-align: center; }
+  .profile-stats { grid-template-columns: 1fr 1fr; }
+}

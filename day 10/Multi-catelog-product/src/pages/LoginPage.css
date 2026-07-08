@@ -1,0 +1,118 @@
+/* ── Login Page ─────────────────────────────────────────────── */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+}
+.login-page__bg {
+  position: fixed;
+  inset: 0;
+  background: var(--gradient-hero);
+  opacity: 0.12;
+  z-index: 0;
+}
+.login-card {
+  max-width: 440px;
+  width: 100%;
+  padding: var(--space-2xl);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.login-card__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: var(--space-xl);
+}
+.login-card__logo-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.6rem;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+}
+.login-card__logo-text {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--txt-primary);
+  letter-spacing: -0.04em;
+}
+.login-card__logo-text span { color: var(--clr-primary); }
+
+.login-card__title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--txt-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.login-card__subtitle {
+  color: var(--txt-secondary);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-xl);
+}
+
+.login-card__features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: var(--space-xl);
+  text-align: left;
+}
+.login-card__feature {
+  background: var(--bg-badge);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: var(--txt-secondary);
+  font-weight: 500;
+}
+
+.login-card__google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--txt-primary);
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+.login-card__google-btn:hover {
+  border-color: var(--clr-primary);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+.login-card__google-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-card__terms {
+  font-size: 0.75rem;
+  color: var(--txt-muted);
+  line-height: 1.5;
+}
+.login-card__terms a { color: var(--clr-primary); }
