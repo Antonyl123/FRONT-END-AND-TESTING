@@ -1,110 +1,295 @@
+ // ===============================
+// LOGIN CREDENTIALS
+// ===============================
+
 export const PRESET_CREDENTIALS = {
   admin: {
-    email: 'admin@company.com',
-    password: 'admin123',
-    name: 'Eleanor Vance',
-    role: 'Administrator',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150'
+    id: 1,
+    name: "John Anderson",
+    role: "HR Administrator",
+    email: "admin@aurahr.com",
+    password: "admin123",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
   },
+
   employee: {
-    email: 'employee@company.com',
-    password: 'emp123',
-    id: 1, // Maps to Ava Patel
-    name: 'Ava Patel',
-    role: 'Lead Designer',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
-  }
+    id: 101,
+    name: "Sophia Miller",
+    role: "UI/UX Designer",
+    email: "employee@aurahr.com",
+    password: "employee123",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
 };
+
+// ===============================
+// EMPLOYEE LIST
+// ===============================
 
 export const INITIAL_EMPLOYEES = [
   {
+    id: 101,
+    name: "Sophia Miller",
+    email: "employee@aurahr.com",
+    role: "UI/UX Designer",
+    department: "Design",
+    phone: "+1 555-123-4567",
+    joinedDate: "2024-01-12",
+    status: "Active",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    id: 102,
+    name: "Michael Brown",
+    email: "michael@aurahr.com",
+    role: "Frontend Developer",
+    department: "Engineering",
+    phone: "+1 555-222-1234",
+    joinedDate: "2023-11-15",
+    status: "Active",
+    avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+  },
+  {
+    id: 103,
+    name: "Emma Wilson",
+    email: "emma@aurahr.com",
+    role: "Backend Developer",
+    department: "Engineering",
+    phone: "+1 555-333-5678",
+    joinedDate: "2022-08-20",
+    status: "Active",
+    avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+  },
+  {
+    id: 104,
+    name: "Daniel Lee",
+    email: "daniel@aurahr.com",
+    role: "Product Manager",
+    department: "Product",
+    phone: "+1 555-444-8899",
+    joinedDate: "2021-04-18",
+    status: "On Leave",
+    avatar: "https://randomuser.me/api/portraits/men/51.jpg",
+  },
+  {
+    id: 105,
+    name: "Olivia Davis",
+    email: "olivia@aurahr.com",
+    role: "HR Executive",
+    department: "People Operations",
+    phone: "+1 555-555-7788",
+    joinedDate: "2024-02-01",
+    status: "Active",
+    avatar: "https://randomuser.me/api/portraits/women/24.jpg",
+  },
+  {
+    id: 106,
+    name: "James Taylor",
+    email: "james@aurahr.com",
+    role: "Finance Analyst",
+    department: "Finance",
+    phone: "+1 555-666-1122",
+    joinedDate: "2020-06-10",
+    status: "Active",
+    avatar: "https://randomuser.me/api/portraits/men/70.jpg",
+  },
+];
+// ===============================
+// ATTENDANCE
+// ===============================
+
+export const INITIAL_ATTENDANCE = [
+  {
     id: 1,
-    name: 'Ava Patel',
-    email: 'employee@company.com',
-    role: 'Lead Designer',
-    department: 'Design',
-    status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-    joinedDate: '2023-04-12',
-    phone: '+1 (555) 234-5678'
+    employeeId: 101,
+    employeeName: "Sophia Miller",
+    date: "2026-07-10",
+    checkIn: "09:00 AM",
+    checkOut: "06:00 PM",
+    status: "Present"
   },
   {
     id: 2,
-    name: 'Marcus Lee',
-    email: 'marcus.l@company.com',
-    role: 'Senior Developer',
-    department: 'Engineering',
-    status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
-    joinedDate: '2022-09-15',
-    phone: '+1 (555) 345-6789'
+    employeeId: 102,
+    employeeName: "Michael Brown",
+    date: "2026-07-10",
+    checkIn: "09:15 AM",
+    checkOut: "06:10 PM",
+    status: "Present"
   },
   {
     id: 3,
-    name: 'Noah Kim',
-    email: 'noah.k@company.com',
-    role: 'HR Specialist',
-    department: 'People Operations',
-    status: 'On Leave',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
-    joinedDate: '2024-01-10',
-    phone: '+1 (555) 456-7890'
+    employeeId: 103,
+    employeeName: "Emma Wilson",
+    date: "2026-07-10",
+    checkIn: "--",
+    checkOut: "--",
+    status: "Absent"
   },
   {
     id: 4,
-    name: 'Sarah Connor',
-    email: 'sarah.c@company.com',
-    role: 'QA Engineer',
-    department: 'Engineering',
-    status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
-    joinedDate: '2023-11-01',
-    phone: '+1 (555) 567-8901'
+    employeeId: 104,
+    employeeName: "Daniel Lee",
+    date: "2026-07-10",
+    checkIn: "09:05 AM",
+    checkOut: "06:00 PM",
+    status: "Present"
   },
   {
     id: 5,
-    name: 'Elena Rostova',
-    email: 'elena.r@company.com',
-    role: 'Product Manager',
-    department: 'Product',
-    status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150',
-    joinedDate: '2021-05-18',
-    phone: '+1 (555) 678-9012'
+    employeeId: 105,
+    employeeName: "Olivia Davis",
+    date: "2026-07-10",
+    checkIn: "09:20 AM",
+    checkOut: "06:15 PM",
+    status: "Late"
   }
 ];
 
-export const INITIAL_ATTENDANCE = [
-  { id: 1, employeeId: 1, name: 'Ava Patel', date: '2026-07-09', checkIn: '08:58 AM', checkOut: '--', status: 'Present' },
-  { id: 2, employeeId: 2, name: 'Marcus Lee', date: '2026-07-09', checkIn: '09:05 AM', checkOut: '05:30 PM', status: 'Present' },
-  { id: 3, employeeId: 3, name: 'Noah Kim', date: '2026-07-09', checkIn: '--', checkOut: '--', status: 'On Leave' },
-  { id: 4, employeeId: 4, name: 'Sarah Connor', date: '2026-07-09', checkIn: '08:45 AM', checkOut: '05:00 PM', status: 'Present' },
-  { id: 5, employeeId: 5, name: 'Elena Rostova', date: '2026-07-09', checkIn: '09:15 AM', checkOut: '--', status: 'Present' }
-];
+// ===============================
+// LEAVE REQUESTS
+// ===============================
 
 export const INITIAL_LEAVE_REQUESTS = [
-  { id: 101, employeeId: 2, name: 'Marcus Lee', type: 'Medical Leave', startDate: '2026-07-15', endDate: '2026-07-17', status: 'Pending', reason: 'Dental surgery recovery' },
-  { id: 102, employeeId: 1, name: 'Ava Patel', type: 'Casual Leave', startDate: '2026-07-20', endDate: '2026-07-22', status: 'Pending', reason: 'Family gathering' }
+  {
+    id: 1,
+    employeeName: "Sophia Miller",
+    type: "Casual Leave",
+    from: "2026-07-15",
+    to: "2026-07-16",
+    reason: "Personal work",
+    status: "Approved"
+  },
+  {
+    id: 2,
+    employeeName: "Michael Brown",
+    type: "Sick Leave",
+    from: "2026-07-18",
+    to: "2026-07-19",
+    reason: "Fever",
+    status: "Pending"
+  },
+  {
+    id: 3,
+    employeeName: "Emma Wilson",
+    type: "Vacation",
+    from: "2026-08-01",
+    to: "2026-08-05",
+    reason: "Family trip",
+    status: "Rejected"
+  }
 ];
+
+// ===============================
+// WORK SCHEDULE
+// ===============================
 
 export const INITIAL_SCHEDULES = [
-  { id: 201, employeeId: 1, name: 'Ava Patel', day: 'Monday', shift: '09:00 AM - 05:00 PM', role: 'Design Review' },
-  { id: 202, employeeId: 1, name: 'Ava Patel', day: 'Tuesday', shift: '09:00 AM - 05:00 PM', role: 'Lead Design' },
-  { id: 203, employeeId: 1, name: 'Ava Patel', day: 'Wednesday', shift: '09:00 AM - 05:00 PM', role: 'Collaborative Sync' },
-  { id: 204, employeeId: 1, name: 'Ava Patel', day: 'Thursday', shift: '09:00 AM - 05:00 PM', role: 'Lead Design' },
-  { id: 205, employeeId: 1, name: 'Ava Patel', day: 'Friday', shift: '09:00 AM - 04:00 PM', role: 'Weekly Retrospective' },
-  
-  { id: 206, employeeId: 2, name: 'Marcus Lee', day: 'Monday', shift: '10:00 AM - 06:00 PM', role: 'Coding / Deployment' },
-  { id: 207, employeeId: 2, name: 'Marcus Lee', day: 'Tuesday', shift: '10:00 AM - 06:00 PM', role: 'Back-end Dev' },
-  { id: 208, employeeId: 2, name: 'Marcus Lee', day: 'Wednesday', shift: '10:00 AM - 06:00 PM', role: 'Back-end Dev' },
-  { id: 209, employeeId: 2, name: 'Marcus Lee', day: 'Thursday', shift: '10:00 AM - 06:00 PM', role: 'Code Refactoring' },
-  { id: 210, employeeId: 2, name: 'Marcus Lee', day: 'Friday', shift: '10:00 AM - 05:00 PM', role: 'Sprint Review' }
+  {
+    id: 1,
+    employeeName: "Sophia Miller",
+    shift: "Morning",
+    timing: "09:00 AM - 06:00 PM"
+  },
+  {
+    id: 2,
+    employeeName: "Michael Brown",
+    shift: "Morning",
+    timing: "09:00 AM - 06:00 PM"
+  },
+  {
+    id: 3,
+    employeeName: "Emma Wilson",
+    shift: "Evening",
+    timing: "01:00 PM - 10:00 PM"
+  },
+  {
+    id: 4,
+    employeeName: "Daniel Lee",
+    shift: "General",
+    timing: "10:00 AM - 07:00 PM"
+  },
+  {
+    id: 5,
+    employeeName: "Olivia Davis",
+    shift: "Morning",
+    timing: "09:00 AM - 06:00 PM"
+  }
 ];
+// ===============================
+// SALARY DATA
+// ===============================
 
 export const INITIAL_SALARIES = [
-  { id: 301, employeeId: 1, name: 'Ava Patel', base: 8500, bonus: 750, deduction: 400, paidStatus: 'Paid', period: 'June 2026' },
-  { id: 302, employeeId: 2, name: 'Marcus Lee', base: 9200, bonus: 900, deduction: 500, paidStatus: 'Paid', period: 'June 2026' },
-  { id: 303, employeeId: 3, name: 'Noah Kim', base: 6000, bonus: 300, deduction: 250, paidStatus: 'Paid', period: 'June 2026' },
-  { id: 304, employeeId: 4, name: 'Sarah Connor', base: 7000, bonus: 500, deduction: 300, paidStatus: 'Paid', period: 'June 2026' },
-  { id: 305, employeeId: 5, name: 'Elena Rostova', base: 10500, bonus: 1200, deduction: 600, paidStatus: 'Paid', period: 'June 2026' }
+  {
+    id: 1,
+    employeeId: 101,
+    name: "Sophia Miller",
+    basic: 65000,
+    bonus: 5000,
+    deductions: 2000,
+    netSalary: 68000,
+    month: "July 2025",
+  },
+  {
+    id: 2,
+    employeeId: 102,
+    name: "Michael Brown",
+    basic: 70000,
+    bonus: 6000,
+    deductions: 2500,
+    netSalary: 73500,
+    month: "July 2025",
+  },
+  {
+    id: 3,
+    employeeId: 103,
+    name: "Emma Wilson",
+    basic: 72000,
+    bonus: 4000,
+    deductions: 3000,
+    netSalary: 73000,
+    month: "July 2025",
+  },
+  {
+    id: 4,
+    employeeId: 104,
+    name: "Daniel Lee",
+    basic: 85000,
+    bonus: 8000,
+    deductions: 3500,
+    netSalary: 89500,
+    month: "July 2025",
+  },
+  {
+    id: 5,
+    employeeId: 105,
+    name: "Olivia Davis",
+    basic: 60000,
+    bonus: 3000,
+    deductions: 1500,
+    netSalary: 61500,
+    month: "July 2025",
+  },
+  {
+    id: 6,
+    employeeId: 106,
+    name: "James Taylor",
+    basic: 75000,
+    bonus: 7000,
+    deductions: 2500,
+    netSalary: 79500,
+    month: "July 2025",
+  },
 ];
+
+// ===============================
+// DASHBOARD STATS
+// ===============================
+
+export const DASHBOARD_STATS = {
+  totalEmployees: INITIAL_EMPLOYEES.length,
+  activeEmployees: INITIAL_EMPLOYEES.filter(emp => emp.status === "Active").length,
+  onLeave: INITIAL_EMPLOYEES.filter(emp => emp.status === "On Leave").length,
+  departments: 5,
+};

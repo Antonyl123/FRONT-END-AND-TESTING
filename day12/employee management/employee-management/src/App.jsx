@@ -1,13 +1,23 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-// Import Mock Data
+// API Service Layer
+import {
+  employeesAPI,
+  attendanceAPI,
+  leaveAPI,
+  schedulesAPI,
+  salariesAPI,
+  authAPI,
+} from './api';
+
+// Fallback mock data (used when json-server is offline)
 import {
   INITIAL_EMPLOYEES,
   INITIAL_ATTENDANCE,
   INITIAL_LEAVE_REQUESTS,
   INITIAL_SCHEDULES,
-  INITIAL_SALARIES
+  INITIAL_SALARIES,
 } from './mockData';
 
 // Import Subcomponents
@@ -29,15 +39,47 @@ function App() {
   // Application Layout States
   const [activeTab, setActiveTab] = useState('dashboard');
   const [darkTheme, setDarkTheme] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Global Mock Database States
-  const [employees, setEmployees] = useState(INITIAL_EMPLOYEES);
-  const [attendance, setAttendance] = useState(INITIAL_ATTENDANCE);
-  const [leaveRequests, setLeaveRequests] = useState(INITIAL_LEAVE_REQUESTS);
-  const [schedules, setSchedules] = useState(INITIAL_SCHEDULES);
-  const [salaries, setSalaries] = useState(INITIAL_SALARIES);
+  // Global Database States (fetched from json-server)
+  const [employees, setEmployees] = useState([]);
+  const [attendance, setAttendance] = useState([]);
+  const [leaveRequests, setLeaveRequests] = useState([]);
+  const [schedules, setSchedules] = useState([]);
+  const [salaries, setSalaries] = useState([]);
 
-  // Synchronize Dark Theme class on container
+  // ─── Load all data from API on mount (falls back to mock data if offline) ──
+  useEffect(() => {
+    const loadAll = async () => {
+      try {
+        const [emps, att, leaves, scheds, sals] = await Promise.all([
+          employeesAPI.getAll(),
+          attendanceAPI.getAll(),
+          leaveAPI.getAll(),
+          schedulesAPI.getAll(),
+          salariesAPI.getAll(),
+        ]);
+        setEmployees(emps);
+        setAttendance(att);
+        setLeaveRequests(leaves);
+        setSchedules(scheds);
+        setSalaries(sals);
+      } catch (err) {
+        // json-server not running — use mock data so the UI still works
+        console.warn('API offline — loading fallback mock data:', err.message);
+        setEmployees(INITIAL_EMPLOYEES);
+        setAttendance(INITIAL_ATTENDANCE);
+        setLeaveRequests(INITIAL_LEAVE_REQUESTS);
+        setSchedules(INITIAL_SCHEDULES);
+        setSalaries(INITIAL_SALARIES);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadAll();
+  }, []);
+
+  // ─── Dark theme sync ────────────────────────────────────────────────────────
   useEffect(() => {
     const root = document.documentElement;
     if (darkTheme) {
@@ -47,11 +89,31 @@ function App() {
     }
   }, [darkTheme]);
 
-  // Auth Handlers
-  const handleLogin = (user, role) => {
-    setCurrentUser(user);
-    setUserRole(role);
+  // ─── Auth credentials (always works, no server dependency) ─────────────────
+  const PORTAL_CREDENTIALS = {
+    admin: {
+      id: 1, email: 'admin@aurahr.com', password: 'admin123',
+      role: 'admin', employeeId: 1, name: 'John Anderson',
+      jobRole: 'HR Administrator',
+      avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+    },
+    employee: {
+      id: 2, email: 'employee@aurahr.com', password: 'employee123',
+      role: 'employee', employeeId: 101, name: 'Sophia Miller',
+      jobRole: 'UI/UX Designer',
+      avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+    },
+  };
+
+  // ─── Auth Handlers ──────────────────────────────────────────────────────────
+  // portal = 'admin' | 'employee'  (passed from LoginView)
+  const handleLogin = (email, password, portal) => {
+    const cred = PORTAL_CREDENTIALS[portal];
+    if (!cred || cred.email !== email || cred.password !== password) return false;
+    setCurrentUser(cred);
+    setUserRole(cred.role);
     setActiveTab('dashboard');
+    return true;
   };
 
   const handleLogout = () => {
@@ -59,108 +121,234 @@ function App() {
     setUserRole(null);
   };
 
-  // Employees Roster Handlers
-  const handleAddEmployee = (newEmp) => {
+  // ─── Employee Handlers ──────────────────────────────────────────────────────
+  const handleAddEmployee = async (newEmp) => {
+    // 1. Update UI state immediately (optimistic update)
     setEmployees((prev) => [...prev, newEmp]);
     
-    // Auto-create initial records in Attendance, Schedule, and Salary database
-    setAttendance((prev) => [
-      ...prev,
-      { id: Date.now() + 10, employeeId: newEmp.id, name: newEmp.name, date: '2026-07-09', checkIn: '--', checkOut: '--', status: 'Absent' }
-    ]);
+    // Auto-create initial records locally
+    const fallbackAtt = { id: Date.now() + 10, employeeId: newEmp.id, employeeName: newEmp.name, date: '2026-07-10', checkIn: '--', checkOut: '--', status: 'Absent' };
+    const fallbackSal = { id: Date.now() + 20, employeeId: newEmp.id, name: newEmp.name, basic: 5000, bonus: 0, deductions: 0, netSalary: 5000, month: 'July 2026' };
     
-    setSalaries((prev) => [
-      ...prev,
-      { id: Date.now() + 20, employeeId: newEmp.id, name: newEmp.name, base: 5000, bonus: 0, deduction: 0, paidStatus: 'Unpaid', period: 'June 2026' }
-    ]);
+    setAttendance((prev) => [...prev, fallbackAtt]);
+    setSalaries((prev) => [...prev, fallbackSal]);
+
+    // 2. Perform API requests in background
+    try {
+      const created = await employeesAPI.create(newEmp);
+      
+      // Auto-create attendance record
+      const attRecord = await attendanceAPI.create({
+        employeeId: created.id,
+        employeeName: created.name,
+        date: '2026-07-10',
+        checkIn: '--',
+        checkOut: '--',
+        status: 'Absent',
+      });
+
+      // Auto-create salary record
+      const salRecord = await salariesAPI.create({
+        employeeId: created.id,
+        name: created.name,
+        basic: 5000,
+        bonus: 0,
+        deductions: 0,
+        netSalary: 5000,
+        month: 'July 2026',
+      });
+      
+      // Sync local IDs with server IDs if needed
+      setEmployees((prev) => prev.map((e) => (e.id === newEmp.id ? created : e)));
+      setAttendance((prev) => prev.map((a) => (a.employeeId === newEmp.id ? attRecord : a)));
+      setSalaries((prev) => prev.map((s) => (s.employeeId === newEmp.id ? salRecord : s)));
+    } catch (err) {
+      console.warn('API error during add employee (working in offline mode):', err.message);
+    }
   };
 
-  const handleUpdateEmployee = (updatedEmp) => {
+  const handleUpdateEmployee = async (updatedEmp) => {
+    // 1. Update UI state immediately (optimistic update)
     setEmployees((prev) => prev.map((e) => (e.id === updatedEmp.id ? updatedEmp : e)));
-    // Sync names in other lists
-    setAttendance((prev) => prev.map((a) => (a.employeeId === updatedEmp.id ? { ...a, name: updatedEmp.name } : a)));
-    setSchedules((prev) => prev.map((s) => (s.employeeId === updatedEmp.id ? { ...s, name: updatedEmp.name } : s)));
-    setSalaries((prev) => prev.map((s) => (s.employeeId === updatedEmp.id ? { ...s, name: updatedEmp.name } : s)));
+    setAttendance((prev) =>
+      prev.map((a) => (a.employeeId === updatedEmp.id ? { ...a, employeeName: updatedEmp.name } : a))
+    );
+    setSchedules((prev) =>
+      prev.map((s) => (s.employeeId === updatedEmp.id ? { ...s, employeeName: updatedEmp.name } : s))
+    );
+    setSalaries((prev) =>
+      prev.map((s) => (s.employeeId === updatedEmp.id ? { ...s, name: updatedEmp.name } : s))
+    );
+
+    // 2. Perform API updates in background
+    try {
+      await employeesAPI.update(updatedEmp.id, updatedEmp);
+
+      // Sync names in other collections
+      const attUpdates = attendance
+        .filter((a) => a.employeeId === updatedEmp.id)
+        .map((a) => attendanceAPI.patch(a.id, { employeeName: updatedEmp.name }));
+
+      const schedUpdates = schedules
+        .filter((s) => s.employeeId === updatedEmp.id)
+        .map((s) => schedulesAPI.patch(s.id, { employeeName: updatedEmp.name }));
+
+      const salUpdates = salaries
+        .filter((s) => s.employeeId === updatedEmp.id)
+        .map((s) => salariesAPI.patch(s.id, { name: updatedEmp.name }));
+
+      await Promise.all([...attUpdates, ...schedUpdates, ...salUpdates]);
+    } catch (err) {
+      console.warn('API error during update employee (working in offline mode):', err.message);
+    }
   };
 
-  const handleDeleteEmployee = (id) => {
+  const handleDeleteEmployee = async (id) => {
+    // 1. Update UI state immediately (optimistic update)
     setEmployees((prev) => prev.filter((e) => e.id !== id));
-    // Remove employee references
     setAttendance((prev) => prev.filter((a) => a.employeeId !== id));
     setSchedules((prev) => prev.filter((s) => s.employeeId !== id));
     setSalaries((prev) => prev.filter((s) => s.employeeId !== id));
     setLeaveRequests((prev) => prev.filter((l) => l.employeeId !== id));
+
+    // 2. Perform API delete in background
+    try {
+      await employeesAPI.delete(id);
+
+      // Cascade-delete related records
+      const toDelete = [
+        ...attendance.filter((a) => a.employeeId === id).map((a) => attendanceAPI.delete(a.id)),
+        ...schedules.filter((s) => s.employeeId === id).map((s) => schedulesAPI.delete(s.id)),
+        ...salaries.filter((s) => s.employeeId === id).map((s) => salariesAPI.delete(s.id)),
+        ...leaveRequests.filter((l) => l.employeeId === id).map((l) => leaveAPI.delete(l.id)),
+      ];
+      await Promise.all(toDelete);
+    } catch (err) {
+      console.warn('API error during delete employee (working in offline mode):', err.message);
+    }
   };
 
-  // Attendance Handlers
-  const handleClockIn = (empId, time) => {
-    setAttendance((prev) =>
-      prev.map((log) =>
-        log.employeeId === empId && log.date === '2026-07-09'
-          ? { ...log, checkIn: time, status: 'Present' }
-          : log
-      )
-    );
+  // ─── Attendance Handlers ─────────────────────────────────────────────────────
+  const handleClockIn = async (empId, time) => {
+    try {
+      const log = attendance.find(
+        (a) => a.employeeId === empId && a.date === '2026-07-10'
+      );
+      if (!log) return;
+      await attendanceAPI.patch(log.id, { checkIn: time, status: 'Present' });
+      setAttendance((prev) =>
+        prev.map((a) =>
+          a.id === log.id ? { ...a, checkIn: time, status: 'Present' } : a
+        )
+      );
+    } catch (err) {
+      console.error('Clock-in error:', err);
+    }
   };
 
-  const handleClockOut = (empId, time) => {
-    setAttendance((prev) =>
-      prev.map((log) =>
-        log.employeeId === empId && log.date === '2026-07-09'
-          ? { ...log, checkOut: time }
-          : log
-      )
-    );
+  const handleClockOut = async (empId, time) => {
+    try {
+      const log = attendance.find(
+        (a) => a.employeeId === empId && a.date === '2026-07-10'
+      );
+      if (!log) return;
+      await attendanceAPI.patch(log.id, { checkOut: time });
+      setAttendance((prev) =>
+        prev.map((a) => (a.id === log.id ? { ...a, checkOut: time } : a))
+      );
+    } catch (err) {
+      console.error('Clock-out error:', err);
+    }
   };
 
-  const handleSubmitLeave = (newRequest) => {
-    setLeaveRequests((prev) => [newRequest, ...prev]);
+  const handleSubmitLeave = async (newRequest) => {
+    try {
+      const created = await leaveAPI.create(newRequest);
+      setLeaveRequests((prev) => [created, ...prev]);
+    } catch (err) {
+      console.error('Submit leave error:', err);
+    }
   };
 
-  const handleApproveLeave = (reqId, empId) => {
-    // Approve Request
-    setLeaveRequests((prev) =>
-      prev.map((r) => (r.id === reqId ? { ...r, status: 'Approved' } : r))
-    );
+  const handleApproveLeave = async (reqId, empId) => {
+    try {
+      await leaveAPI.patch(reqId, { status: 'Approved' });
+      setLeaveRequests((prev) =>
+        prev.map((r) => (r.id === reqId ? { ...r, status: 'Approved' } : r))
+      );
 
-    // Sync status to Active Attendance log for today (July 9th)
-    setAttendance((prev) =>
-      prev.map((log) =>
-        log.employeeId === empId && log.date === '2026-07-09'
-          ? { ...log, checkIn: '--', checkOut: '--', status: 'On Leave' }
-          : log
-      )
-    );
+      // Sync attendance to 'On Leave'
+      const log = attendance.find(
+        (a) => a.employeeId === empId && a.date === '2026-07-10'
+      );
+      if (log) {
+        await attendanceAPI.patch(log.id, {
+          checkIn: '--',
+          checkOut: '--',
+          status: 'On Leave',
+        });
+        setAttendance((prev) =>
+          prev.map((a) =>
+            a.id === log.id
+              ? { ...a, checkIn: '--', checkOut: '--', status: 'On Leave' }
+              : a
+          )
+        );
+      }
 
-    // Set employee active status in directory
-    setEmployees((prev) =>
-      prev.map((e) => (e.id === empId ? { ...e, status: 'On Leave' } : e))
-    );
+      // Sync employee status
+      await employeesAPI.patch(empId, { status: 'On Leave' });
+      setEmployees((prev) =>
+        prev.map((e) => (e.id === empId ? { ...e, status: 'On Leave' } : e))
+      );
+    } catch (err) {
+      console.error('Approve leave error:', err);
+    }
   };
 
-  const handleRejectLeave = (reqId) => {
-    setLeaveRequests((prev) =>
-      prev.map((r) => (r.id === reqId ? { ...r, status: 'Rejected' } : r))
-    );
+  const handleRejectLeave = async (reqId) => {
+    try {
+      await leaveAPI.patch(reqId, { status: 'Rejected' });
+      setLeaveRequests((prev) =>
+        prev.map((r) => (r.id === reqId ? { ...r, status: 'Rejected' } : r))
+      );
+    } catch (err) {
+      console.error('Reject leave error:', err);
+    }
   };
 
-  // Schedule Handlers
-  const handleAddShift = (newShift) => {
-    setSchedules((prev) => [...prev, newShift]);
+  // ─── Schedule Handlers ──────────────────────────────────────────────────────
+  const handleAddShift = async (newShift) => {
+    try {
+      const created = await schedulesAPI.create(newShift);
+      setSchedules((prev) => [...prev, created]);
+    } catch (err) {
+      console.error('Add shift error:', err);
+    }
   };
 
-  const handleDeleteShift = (shiftId) => {
-    setSchedules((prev) => prev.filter((s) => s.id !== shiftId));
+  const handleDeleteShift = async (shiftId) => {
+    try {
+      await schedulesAPI.delete(shiftId);
+      setSchedules((prev) => prev.filter((s) => s.id !== shiftId));
+    } catch (err) {
+      console.error('Delete shift error:', err);
+    }
   };
 
-  // Salary Handlers
-  const handleUpdateSalary = (salaryId, salaryUpdates) => {
-    setSalaries((prev) =>
-      prev.map((s) => (s.id === salaryId ? { ...s, ...salaryUpdates } : s))
-    );
+  // ─── Salary Handlers ─────────────────────────────────────────────────────────
+  const handleUpdateSalary = async (salaryId, salaryUpdates) => {
+    try {
+      await salariesAPI.patch(salaryId, salaryUpdates);
+      setSalaries((prev) =>
+        prev.map((s) => (s.id === salaryId ? { ...s, ...salaryUpdates } : s))
+      );
+    } catch (err) {
+      console.error('Update salary error:', err);
+    }
   };
 
-  // Renders correct view based on navigation selection
+  // ─── Render ─────────────────────────────────────────────────────────────────
   const renderActiveView = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -225,6 +413,37 @@ function App() {
     }
   };
 
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          fontSize: '1.2rem',
+          color: '#6366f1',
+          fontFamily: 'Inter, sans-serif',
+          flexDirection: 'column',
+          gap: '12px',
+        }}
+      >
+        <div
+          style={{
+            width: 48,
+            height: 48,
+            border: '4px solid #e0e7ff',
+            borderTop: '4px solid #6366f1',
+            borderRadius: '50%',
+            animation: 'spin 0.8s linear infinite',
+          }}
+        />
+        <span>Loading AuraHR…</span>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
+  }
+
   return (
     <div className={`app-shell ${darkTheme ? 'dark-theme' : 'light-theme'}`}>
       {!currentUser ? (
@@ -251,9 +470,7 @@ function App() {
             />
 
             {/* Injected Tab Content */}
-            <main className="portal-content-pane">
-              {renderActiveView()}
-            </main>
+            <main className="portal-content-pane">{renderActiveView()}</main>
           </div>
 
           {/* Shared Chatbot Assistant */}

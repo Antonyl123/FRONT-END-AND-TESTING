@@ -14,22 +14,22 @@ export default function DashboardView({
   const totalEmployees = employees.length;
   
   const presentToday = attendance.filter(
-    (log) => log.date === '2026-07-09' && log.checkIn !== '--' && log.status === 'Present'
+    (log) => log.date === '2026-07-10' && log.checkIn !== '--' && log.status === 'Present'
   ).length;
 
   const pendingLeaves = leaveRequests.filter((req) => req.status === 'Pending').length;
   
-  const totalPayroll = salaries.reduce((acc, curr) => acc + curr.base + (curr.bonus || 0) - (curr.deduction || 0), 0);
+  const totalPayroll = salaries.reduce((acc, curr) => acc + (curr.basic || 0) + (curr.bonus || 0) - (curr.deductions || 0), 0);
 
-  // Employee stats calculations (using ID 1 for Ava Patel as the preset employee)
-  const employeeId = user.id || 1;
+  // Employee stats — use employeeId from credentials record
+  const employeeId = user.employeeId || user.id;
   const myShifts = schedules.filter((s) => s.employeeId === employeeId).length;
   const myLeaves = leaveRequests.filter((l) => l.employeeId === employeeId).length;
   
-  const mySalaryRecord = salaries.find((s) => s.employeeId === employeeId) || { base: 0, bonus: 0, deduction: 0 };
-  const myNetSalary = mySalaryRecord.base + mySalaryRecord.bonus - mySalaryRecord.deduction;
+  const mySalaryRecord = salaries.find((s) => s.employeeId === employeeId) || { basic: 0, bonus: 0, deductions: 0 };
+  const myNetSalary = (mySalaryRecord.basic || 0) + (mySalaryRecord.bonus || 0) - (mySalaryRecord.deductions || 0);
 
-  const todayLog = attendance.find((log) => log.employeeId === employeeId && log.date === '2026-07-09');
+  const todayLog = attendance.find((log) => log.employeeId === employeeId && log.date === '2026-07-10');
   const myStatus = todayLog ? todayLog.status : 'Not Clocked In';
 
   // SVG mini-chart paths for extra aesthetics
@@ -295,10 +295,10 @@ export default function DashboardView({
                     .filter((s) => s.employeeId === employeeId)
                     .map((shift) => (
                       <div className="quick-shift-row" key={shift.id}>
-                        <div className="shift-day-circle">{shift.day.substring(0, 3)}</div>
+                        <div className="shift-day-circle">{shift.shift.substring(0, 3)}</div>
                         <div className="shift-text-details">
-                          <strong>{shift.role}</strong>
-                          <p>{shift.shift}</p>
+                          <strong>{shift.shift} Shift</strong>
+                          <p>{shift.timing}</p>
                         </div>
                         <span className="pill badge-info">Active</span>
                       </div>
