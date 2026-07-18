@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function SalaryView({ user, userRole, salaries, onUpdateSalary }) {
   const employeeId = user.id || 1;

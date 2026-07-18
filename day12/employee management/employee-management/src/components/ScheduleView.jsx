@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function ScheduleView({ user, userRole, employees, schedules, onAddShift, onDeleteShift }) {
   const employeeId = user.id || 1;

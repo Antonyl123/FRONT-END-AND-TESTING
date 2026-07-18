@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 // Hardcoded credentials — works without json-server
 const CREDENTIALS = {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function EmployeesView({ userRole, employees, onAddEmployee, onUpdateEmployee, onDeleteEmployee }) {
   const [searchQuery, setSearchQuery] = useState('');

@@ -8,7 +8,6 @@ import {
   leaveAPI,
   schedulesAPI,
   salariesAPI,
-  authAPI,
 } from './api';
 
 // Fallback mock data (used when json-server is offline)

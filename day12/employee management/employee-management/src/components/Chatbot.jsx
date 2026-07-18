@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const PRESET_CHIPS = [
   { label: 'How to clock-in?', query: 'clock-in' },

@@ -50,4 +50,55 @@ public class LoginSteps {
         Assert.assertTrue(loginPage.isDashboardVisible(),
             "Dashboard should be visible after successful login");
     }
+
+    @When("the admin navigates to the {string} tab")
+    public void adminNavigatesToTab(String tabName) {
+        loginPage.navigateToTab(tabName);
+    }
+
+    @When("the employee navigates to the {string} tab")
+    public void employeeNavigatesToTab(String tabName) {
+        loginPage.navigateToTab(tabName);
+    }
+
+    @And("the admin clicks the {string} button")
+    public void adminClicksButton(String btnName) {
+        if (btnName.equalsIgnoreCase("Add New Employee")) {
+            loginPage.clickAddEmployee();
+        } else if (btnName.equalsIgnoreCase("Register Employee")) {
+            loginPage.clickRegisterEmployee();
+        }
+    }
+
+    @And("the admin enters the following employee details:")
+    public void adminEntersEmployeeDetails(io.cucumber.datatable.DataTable dataTable) {
+        java.util.Map<String, String> data = dataTable.asMap(String.class, String.class);
+        loginPage.enterEmployeeDetails(
+            data.get("Name"),
+            data.get("Email"),
+            data.get("Role"),
+            data.get("Department"),
+            data.get("Phone")
+        );
+    }
+
+    @Then("the new employee {string} should be visible in the employees list")
+    public void theNewEmployeeShouldBeVisibleInTheEmployeesList(String employeeName) {
+        Assert.assertTrue(loginPage.isEmployeeInList(employeeName),
+            "Employee " + employeeName + " should be present in the employees list");
+    }
+
+    @And("the new employee {string} should reflect in the backend API")
+    public void theNewEmployeeShouldReflectInTheBackendApi(String email) {
+        Assert.assertTrue(loginPage.checkBackendApiForEmployee(email),
+            "Employee with email " + email + " should be successfully stored and returned by json-server API at http://localhost:3001/employees");
+    }
+
+    @Then("the {string} button should not be visible")
+    public void theButtonShouldNotBeVisible(String btnName) {
+        if (btnName.equalsIgnoreCase("Add New Employee")) {
+            Assert.assertFalse(loginPage.isAddEmployeeButtonVisible(),
+                "Add New Employee button should be hidden for standard employee portal users");
+        }
+    }
 }

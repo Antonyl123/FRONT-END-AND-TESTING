@@ -43,6 +43,116 @@
       "joinedDate": "2026-07-16",
       "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
       "status": "Active"
+    },
+    {
+      "id": "bLJ6n131fIo",
+      "name": "Sarah Connor",
+      "email": "sarah.connor@aurahr.com",
+      "role": "QA Automation Engineer",
+      "department": "Engineering",
+      "phone": "+1-555-0199",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784365923728",
+      "name": "Sarah Connor",
+      "email": "sarah.connor@aurahr.com",
+      "role": "QA Automation Engineer",
+      "department": "Engineering",
+      "phone": "+1-555-0199",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784366612077",
+      "name": "Sarah Connor",
+      "email": "sarah.connor@aurahr.com",
+      "role": "QA Automation Engineer",
+      "department": "Engineering",
+      "phone": "+1-555-0199",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784367679084",
+      "name": "Sarah Connor",
+      "email": "sarah.connor@aurahr.com",
+      "role": "QA Automation Engineer",
+      "department": "Engineering",
+      "phone": "+1-555-0199",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784368078252",
+      "name": "Alex Turing",
+      "email": "alex.turing@aurahr.com",
+      "role": "Software Tester",
+      "department": "Engineering",
+      "phone": "+1-555-7890",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784369336009",
+      "name": "Alex Turing",
+      "email": "alex.turing@aurahr.com",
+      "role": "Software Tester",
+      "department": "Engineering",
+      "phone": "+1-555-7890",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784370503637",
+      "name": "Alex Turing",
+      "email": "alex.turing@aurahr.com",
+      "role": "Software Tester",
+      "department": "Engineering",
+      "phone": "+1-555-7890",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784370703433",
+      "name": "Alex Turing",
+      "email": "alex.turing@aurahr.com",
+      "role": "Software Tester",
+      "department": "Engineering",
+      "phone": "+1-555-7890",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784382346596",
+      "name": "Alex Turing",
+      "email": "alex.turing@aurahr.com",
+      "role": "Software Tester",
+      "department": "Engineering",
+      "phone": "+1-555-7890",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
+    },
+    {
+      "id": "1784384344703",
+      "name": "Alex Turing",
+      "email": "alex.turing@aurahr.com",
+      "role": "Software Tester",
+      "department": "Engineering",
+      "phone": "+1-555-7890",
+      "joinedDate": "2026-07-18",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "status": "Active"
     }
   ],
   "attendance": [
@@ -81,6 +191,96 @@
       "checkOut": "--",
       "status": "Absent",
       "id": "wggUIyE-atE"
+    },
+    {
+      "employeeId": "bLJ6n131fIo",
+      "employeeName": "Sarah Connor",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "e6tcNPw8cJg"
+    },
+    {
+      "employeeId": "1784365923728",
+      "employeeName": "Sarah Connor",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "fan89vpds"
+    },
+    {
+      "employeeId": "1784366612077",
+      "employeeName": "Sarah Connor",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "imyowmxr4"
+    },
+    {
+      "employeeId": "1784367679084",
+      "employeeName": "Sarah Connor",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "xgx9m10h4"
+    },
+    {
+      "employeeId": "1784368078252",
+      "employeeName": "Alex Turing",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "1jqjlxrbt"
+    },
+    {
+      "employeeId": "1784369336009",
+      "employeeName": "Alex Turing",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "apvkdhkyk"
+    },
+    {
+      "employeeId": "1784370503637",
+      "employeeName": "Alex Turing",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "98u52mgka"
+    },
+    {
+      "employeeId": "1784370703433",
+      "employeeName": "Alex Turing",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "n8lkius9d"
+    },
+    {
+      "employeeId": "1784382346596",
+      "employeeName": "Alex Turing",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "cvm8985p2"
+    },
+    {
+      "employeeId": "1784384344703",
+      "employeeName": "Alex Turing",
+      "date": "2026-07-10",
+      "checkIn": "--",
+      "checkOut": "--",
+      "status": "Absent",
+      "id": "hsy5l6nk6"
     }
   ],
   "leaveRequests": [
@@ -202,6 +402,106 @@
       "netSalary": 5000,
       "month": "July 2026",
       "id": "g4WZJkv0yp8"
+    },
+    {
+      "employeeId": "bLJ6n131fIo",
+      "name": "Sarah Connor",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "NN695X6u_ok"
+    },
+    {
+      "employeeId": "1784365923728",
+      "name": "Sarah Connor",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "cuvsljkw5"
+    },
+    {
+      "employeeId": "1784366612077",
+      "name": "Sarah Connor",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "7tcmfu13y"
+    },
+    {
+      "employeeId": "1784367679084",
+      "name": "Sarah Connor",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "ane5bcugd"
+    },
+    {
+      "employeeId": "1784368078252",
+      "name": "Alex Turing",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "w4rilqtwh"
+    },
+    {
+      "employeeId": "1784369336009",
+      "name": "Alex Turing",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "sksbon6kv"
+    },
+    {
+      "employeeId": "1784370503637",
+      "name": "Alex Turing",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "tt3n937ry"
+    },
+    {
+      "employeeId": "1784370703433",
+      "name": "Alex Turing",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "y9g39nwue"
+    },
+    {
+      "employeeId": "1784382346596",
+      "name": "Alex Turing",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "zpm6u2g7i"
+    },
+    {
+      "employeeId": "1784384344703",
+      "name": "Alex Turing",
+      "basic": 5000,
+      "bonus": 0,
+      "deductions": 0,
+      "netSalary": 5000,
+      "month": "July 2026",
+      "id": "wab15a11w"
     }
   ],
   "credentials": [
